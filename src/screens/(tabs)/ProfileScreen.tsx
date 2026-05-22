@@ -1,12 +1,22 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SavedAddressCard from "../../components/Profile/SavedAddressCard";
 import PaymentMethodCard from "../../components/Profile/PaymentMet";
 import OrderHistoryCard from "../../components/Profile/OrderHistoryCard";
 import { Ionicons } from "@expo/vector-icons";
 import { ScrollView } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {AuthContext} from "../../AuthContext";
+import { useContext } from "react";
 
 export default function ProfileScreen() {
+  // AuthContext might be exported as a component or non-Context value; cast to any to avoid TS error
+  const { setIsAuthenticated } = useContext(AuthContext);
+  function logout() {
+    AsyncStorage.removeItem("user");
+    Alert.alert("User logged out successfully");
+    setIsAuthenticated(false);
+  }
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
@@ -26,11 +36,14 @@ export default function ProfileScreen() {
         <Text style={styles.accountText}>Account Settings</Text>
         <View style={styles.settingsContainer}>
           <View style={styles.innerSettingsContainer}>
-            <Pressable  style={({pressed})=>[
-              styles.setting1,{
-                opacity:pressed?0.6:1
-              }
-            ]}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.setting1,
+                {
+                  opacity: pressed ? 0.6 : 1,
+                },
+              ]}
+            >
               <View style={styles.left}>
                 <Ionicons name="person-outline" size={24} color="#625E59" />
                 <Text style={styles.textInner}>Personal Information</Text>
@@ -41,13 +54,20 @@ export default function ProfileScreen() {
                 color="#625E59"
               />
             </Pressable>
-            <Pressable 
-            style={({pressed})=>[
-              styles.setting1,{
-                opacity:pressed?0.6:1
-              }]}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.setting1,
+                {
+                  opacity: pressed ? 0.6 : 1,
+                },
+              ]}
+            >
               <View style={styles.left}>
-                <Ionicons name="notifications-outline" size={24} color="#625E59" />
+                <Ionicons
+                  name="notifications-outline"
+                  size={24}
+                  color="#625E59"
+                />
                 <Text style={styles.textInner}>Notification Settings</Text>
               </View>
               <Ionicons
@@ -56,12 +76,20 @@ export default function ProfileScreen() {
                 color="#625E59"
               />
             </Pressable>
-            <Pressable style={({pressed})=>[
-              styles.setting1,{
-                opacity:pressed?0.6:1
-              }]}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.setting1,
+                {
+                  opacity: pressed ? 0.6 : 1,
+                },
+              ]}
+            >
               <View style={styles.left}>
-                <Ionicons name="alert-circle-outline" size={24} color="#625E59" />
+                <Ionicons
+                  name="alert-circle-outline"
+                  size={24}
+                  color="#625E59"
+                />
                 <Text style={styles.textInner}>Account & Privacy</Text>
               </View>
               <Ionicons
@@ -72,6 +100,9 @@ export default function ProfileScreen() {
             </Pressable>
           </View>
         </View>
+        <Pressable onPress={() => logout()} style={styles.logout}>
+          <Text style={styles.logoutText}>Logout</Text>
+        </Pressable>
       </SafeAreaView>
     </ScrollView>
   );
@@ -125,5 +156,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 20,
+  },
+  logout: {
+    backgroundColor: "#AB3500",
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    borderRadius: 20,
+
+    marginTop: 20,
+  },
+  logoutText: {
+    color: "#fff",
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "500",
   },
 });

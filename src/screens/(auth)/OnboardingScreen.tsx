@@ -3,8 +3,16 @@ import { StatusBar } from "expo-status-bar";
 import { View, Text, Image, StyleSheet } from "react-native";
 
 import CustomButton from "../../components/CustomBtn";
+import {useNavigation,NavigationProp} from "@react-navigation/native"
 
+export type RootStackParamList = {
+  Onboarding: undefined;
+  Signup: undefined;
+  Login: undefined;
+  Home: undefined;
+};
 export default function OnboardingScreen() {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -77,7 +85,7 @@ export default function OnboardingScreen() {
       <View style={styles.buttonContainer}>
         <CustomButton
           title="Get Started"
-          onPress={() => console.log("Started")}
+          onPress={() => navigation.navigate("Signup")}
         />
       </View>
     </View>

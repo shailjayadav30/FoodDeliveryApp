@@ -8,7 +8,6 @@ const ProfileHeader = () => {
   return (
     <View style={styles.container}>
       <Pressable
-        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
         style={styles.left}
       >
         <Ionicons name="menu-outline" size={30} color="#D04A14" />

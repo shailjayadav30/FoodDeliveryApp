@@ -15,41 +15,68 @@ import FoodItemsCard from "../../components/FoodItemsCard";
 import MainBowls from "../../components/MainBowls";
 
 const DRINKS = [
-  { id: "1", name: "Green Glow", price: "$7.50", image: require("../../../assets/drink1.png") },
-  { id: "2", name: "Zest Spritz", price: "$6.00", image: require("../../../assets/drink2.png") },
-  { id: "3", name: "Oat Latte", price: "$5.50", image: require("../../../assets/drink3.png") },
-   { id: "4", name: "Green Glow", price: "$7.50", image: require("../../../assets/drink1.png") },
-  { id: "5", name: "Zest Spritz", price: "$6.00", image: require("../../../assets/drink2.png") },
-  { id: "6", name: "Oat Latte", price: "$5.50", image: require("../../../assets/drink3.png") },
+  {
+    id: "1",
+    name: "Green Glow",
+    price: "$7.50",
+    image: require("../../../assets/drink1.png"),
+  },
+  {
+    id: "2",
+    name: "Zest Spritz",
+    price: "$6.00",
+    image: require("../../../assets/drink2.png"),
+  },
+  {
+    id: "3",
+    name: "Oat Latte",
+    price: "$5.50",
+    image: require("../../../assets/drink3.png"),
+  },
+  {
+    id: "4",
+    name: "Green Glow",
+    price: "$7.50",
+    image: require("../../../assets/drink1.png"),
+  },
+  {
+    id: "5",
+    name: "Zest Spritz",
+    price: "$6.00",
+    image: require("../../../assets/drink2.png"),
+  },
+  {
+    id: "6",
+    name: "Oat Latte",
+    price: "$5.50",
+    image: require("../../../assets/drink3.png"),
+  },
 ];
 
-export default function RestaurantScreen({ navigation,route }: any) {
-    const { restaurantName ,rating,deliveryTime} = route.params;
+export default function RestaurantScreen({ navigation, route }: any) {
+  const { restaurantName, rating, deliveryTime } = route.params;
 
   const [cartCount, setCartCount] = useState(2);
   const [cartTotal, setCartTotal] = useState(31.45);
 
   return (
     <SafeAreaView style={styles.safe}>
-      <StatusBar  hidden={true}/>
-
-    
+      <StatusBar hidden={true} />
 
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
-
         <Image
           source={require("../../../assets/restaurantBg.png")}
           style={styles.heroImage}
           resizeMode="cover"
         />
 
-        
-        <RestauDetailsCard restaurantName={restaurantName} deliveryTime={deliveryTime} rating={rating}/>
-
+        <RestauDetailsCard
+          restaurantName={restaurantName}
+          deliveryTime={deliveryTime}
+          rating={rating}
+        />
 
         <View style={styles.menuContainer}>
-
-      
           <Text style={styles.sectionTitle}>Fresh Starters</Text>
 
           <FoodItemsCard
@@ -59,7 +86,7 @@ export default function RestaurantScreen({ navigation,route }: any) {
             price="$12.50"
             isVegan
             isBestSeller
-            onAdd={() => console.log("Add avocado toast")}
+            onAdd={() =>console.log("Add avocado toast")}
           />
           <FoodItemsCard
             image={require("../../../assets/food2.png")}
@@ -115,7 +142,7 @@ export default function RestaurantScreen({ navigation,route }: any) {
           </ScrollView>
         </View>
 
-        {/* Bottom padding for cart bar */}
+
         <View style={{ height: 100 }} />
       </ScrollView>
 
@@ -133,7 +160,9 @@ export default function RestaurantScreen({ navigation,route }: any) {
             <Text style={styles.cartTotal}>${cartTotal.toFixed(2)}</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.viewCartBtn} onPress={()=>navigation.navigate("Cart")}>
+        <TouchableOpacity
+          style={styles.viewCartBtn}
+          onPress={()=>navigation.navigate("Cart")}>
           <Text style={styles.viewCartText} >View Cart</Text>
         </TouchableOpacity>
       </View>
@@ -212,7 +241,6 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     textAlign: "center",
   },
-
 
   cartBar: {
     position: "absolute",

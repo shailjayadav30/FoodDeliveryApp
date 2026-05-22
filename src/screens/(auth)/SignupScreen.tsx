@@ -32,7 +32,8 @@ async  function handleSignUp() {
  await AsyncStorage.setItem("user",JSON.stringify(inputValues))
     console.log("Saved user", inputValues);
     Alert.alert("Sign up successfully");
-    setIsAuthenticated(true);
+    navigation.navigate("Login")
+    // setIsAuthenticated(true);
   }
   catch(error){
 console.log("error",error)

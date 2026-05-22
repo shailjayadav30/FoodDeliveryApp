@@ -84,7 +84,7 @@ export default function HomeScreen({ navigation }: any) {
                 <Text style={styles.limitedText}>LIMITED OFFER</Text>
               </View>
               <Text style={styles.bannerTitle}>
-                Get 40% OFF{"\n"}Gourmet{"\n"}Delights
+                Get 40% OFF Gourmet Delights
               </Text>
               <Text style={styles.bannerSub}>Valid for the next 2 hours!</Text>
             </View>
