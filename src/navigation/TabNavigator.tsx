@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeStackNavigator from "./HomeScreenNavigator";
 import SearchScreen from "../screens/(tabs)/SearchScreen";
-import OrdersScreen from "../screens/(tabs)/OrdersScreen";
 import ProfileScreen from "../screens/(tabs)/ProfileScreen";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
@@ -30,7 +29,7 @@ export default function TabNavigator() {
             <Ionicons
               name={focused ? "home" : "home-outline"}
               size={22}
-              focused=""
+              color={focused ? "#E8541A" : "#9CA3AF"}
             />
           ),
           tabBarActiveTintColor: "#E8541A",
@@ -42,34 +41,44 @@ export default function TabNavigator() {
         component={SearchScreen}
         options={{
           header: () => <SearchHeader />,
-          tabBarIcon: () => (
-            <Ionicons name="search-outline" size={22} color="#E85414" />
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused ? "search" : "search-outline"}
+              size={22}
+              color={focused ? "#E8541A" : "#9CA3AF"}
+            />
           ),
           tabBarActiveTintColor: "#E8541A",
           tabBarInactiveTintColor: "#9CA3AF",
         }}
       />
 
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Orders"
         component={OrdersScreen}
         options={{
           // header: () => <HomeHeader />,
-          tabBarIcon: () => (
-            <Ionicons name="receipt-outline" size={22} color="#E8541A" />
+          tabBarIcon: ({focused}) => (
+            <Ionicons name={focused?"receipt":"receipt-outline"} size={22}  
+             color={focused?"#E8541A":"#9CA3AF"}
+            />
           ),
           tabBarActiveTintColor: "#E8541A",
           tabBarInactiveTintColor: "#9CA3AF",
         }}
-      />
+      /> */}
 
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
           header: () => <ProfileHeader />,
-          tabBarIcon: () => (
-            <Ionicons name="person-outline" size={22} color="#E8541A" />
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused? "person":"person-outline"}
+              size={22}
+              color={focused ? "#E8541A" : "#9CA3AF"}
+            />
           ),
           tabBarActiveTintColor: "#E8541A",
           tabBarInactiveTintColor: "#9CA3AF",

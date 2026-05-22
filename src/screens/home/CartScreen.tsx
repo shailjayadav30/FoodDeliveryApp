@@ -37,28 +37,22 @@ const INITIAL_ITEMS = [
   },
 ];
 
-const PAYMENT_METHODS = [
-  { id: "applepay", type: "applepay" },
-  { id: "visa", type: "card", last4: "•••• 4242", brand: "Visa Gold" },
-];
-
 const DELIVERY_FEE = 2.5;
 const PROMO_DISCOUNT = 5.0;
 
-export default function CartScreen({ navigation }:any) {
+export default function CartScreen({ navigation }: any) {
   const [cartItems, setCartItems] = useState(INITIAL_ITEMS);
-  const [selectedPayment, setSelectedPayment] = useState("applepay");
   const [promoCode, setPromoCode] = useState("");
   const [promoApplied, setPromoApplied] = useState(true);
 
-  const handleIncrease = (id:number) =>
+  const handleIncrease = (id: number) =>
     setCartItems((prev) =>
       prev.map((item) =>
         item.id === id ? { ...item, qty: item.qty + 1 } : item,
       ),
     );
 
-  const handleDecrease = (id:number) =>
+  const handleDecrease = (id: number) =>
     setCartItems((prev) =>
       prev.map((item) =>
         item.id === id && item.qty > 1 ? { ...item, qty: item.qty - 1 } : item,
@@ -72,14 +66,13 @@ export default function CartScreen({ navigation }:any) {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar  hidden={true}/>
+      <StatusBar hidden={true} />
 
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
-   
         <View style={styles.sectionRow}>
           <Text style={styles.sectionTitle}>Order Details</Text>
           <Text style={styles.redLabel}>{totalItems} Items</Text>
@@ -94,7 +87,6 @@ export default function CartScreen({ navigation }:any) {
           />
         ))}
 
-        
         <View style={[styles.sectionRow, styles.mt24]}>
           <Text style={styles.sectionTitle}>Delivery Address</Text>
           <TouchableOpacity activeOpacity={0.7}>
@@ -107,25 +99,6 @@ export default function CartScreen({ navigation }:any) {
             "4522 Premium Heights Dr,\nPenthouse B\nManhattan, New York, 10001"
           }
         />
-
-
-        <View style={[styles.sectionRow, styles.mt24]}>
-          <Text style={styles.sectionTitle}>Payment Method</Text>
-          <TouchableOpacity activeOpacity={0.7}>
-            <Text style={styles.redLabel}>Manage</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.paymentRow}>
-          {PAYMENT_METHODS.map((method) => (
-            <PaymentMethodCard
-              key={method.id}
-              method={method}
-              selected={selectedPayment === method.id}
-              onSelect={setSelectedPayment}
-            />
-          ))}
-        </View>
-
 
         <View style={styles.mt24}>
           <Text style={[styles.sectionTitle, { marginBottom: 12 }]}>
@@ -157,12 +130,19 @@ export default function CartScreen({ navigation }:any) {
           </View>
         </View>
 
-
         <View style={styles.summaryCard}>
-          <SummaryRow label="Subtotal" value={`$${subtotal.toFixed(2)}`} labelStyle={undefined} valueStyle={undefined} />
+          <SummaryRow
+            label="Subtotal"
+            value={`$${subtotal.toFixed(2)}`}
+            labelStyle={undefined}
+            valueStyle={undefined}
+          />
           <SummaryRow
             label="Delivery Fee"
-            value={`$${DELIVERY_FEE.toFixed(2)}`} labelStyle={undefined} valueStyle={undefined}          />
+            value={`$${DELIVERY_FEE.toFixed(2)}`}
+            labelStyle={undefined}
+            valueStyle={undefined}
+          />
           {promoApplied && (
             <SummaryRow
               label="Promo Discount"
@@ -194,7 +174,7 @@ export default function CartScreen({ navigation }:any) {
   );
 }
 
-function SummaryRow({ label, value, labelStyle, valueStyle }:any) {
+function SummaryRow({ label, value, labelStyle, valueStyle }: any) {
   return (
     <View style={styles.summaryRow}>
       <Text style={[styles.summaryLabel, labelStyle]}>{label}</Text>
